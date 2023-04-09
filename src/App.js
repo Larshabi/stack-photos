@@ -24,6 +24,9 @@ function App() {
       const resp = await fetch(url)
       const data = await resp.json()
       setPhotos((oldPhoto)=>{
+      if(searchTerm && page === 1){
+        return data.results
+      }
         if(searchTerm){
           return [...oldPhoto, ...data.results]
         }else{
@@ -39,7 +42,7 @@ function App() {
   }
   const handleSubmit = (e)=>{
     e.preventDefault()
-    fetchImages()
+    setPage(1)
   }
 
   useEffect(()=>{
